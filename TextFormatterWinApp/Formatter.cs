@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,5 +52,16 @@ namespace TextFormatterWinApp
             return sb.ToString();
         }
 
+        public static string RemoveLineBreakToEndOfLine(string text)
+        {
+
+            var regex = new Regex("(\\r\\n)+$");
+            var results = regex.Matches(text);
+            if (results.Count <= 0)
+            {
+                return text;
+            }
+            return text.Substring(0, results[0].Index);
+        }
     }
 }

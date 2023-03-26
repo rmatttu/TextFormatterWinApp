@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +33,9 @@ namespace TextFormatterWinApp
                 return;
             }
 
-            var result = Formatter.AddQuoteRange(textBoxSource.Text, new Range(1, textLines.Count - 1));
+            var normalized = Formatter.RemoveLineBreakToEndOfLine(textBoxSource.Text);
+            var normalizedLines = normalized.Split('\n').ToList();
+            var result = Formatter.AddQuoteRange(normalized, new Range(1, normalizedLines.Count - 1));
 
             textBoxDestination.Text = result;
         }
