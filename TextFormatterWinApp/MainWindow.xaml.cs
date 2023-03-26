@@ -27,23 +27,15 @@ namespace TextFormatterWinApp
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var textLines = textBoxSource.Text.Split('\n');
-            if (textLines.Length <= 0)
+            var textLines = textBoxSource.Text.Split('\n').ToList();
+            if (textLines.Count <= 0)
             {
                 return;
             }
 
-            StringBuilder sb = new StringBuilder();
-            sb.Append(textLines[0]);
+            var result = Formatter.AddQuoteRange(textBoxSource.Text, new Range(1, textLines.Count - 1));
 
-            for (int i = 1; i < textLines.Length; i++)
-            {
-                sb.Append("> ");
-                sb.Append(textLines[i]);
-                sb.Append("\n");
-            }
-
-            textBoxDestination.Text = sb.ToString();
+            textBoxDestination.Text = result;
         }
 
         private void ButtonDestination_Click(object sender, RoutedEventArgs e)
