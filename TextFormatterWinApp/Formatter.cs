@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,6 +38,7 @@ namespace TextFormatterWinApp
             for (int i = 0; i < targetIndexRange.Start.Value; i++)
             {
                 sb.Append(textLines[i]);
+                sb.Append("\n");
             }
             for (int i = targetIndexRange.Start.Value; i < targetIndexRange.End.Value + 1; i++)
             {
@@ -48,6 +49,7 @@ namespace TextFormatterWinApp
             for (int i = targetIndexRange.End.Value + 1; i < textLines.Count; i++)
             {
                 sb.Append(textLines[i]);
+                sb.Append("\n");
             }
             return sb.ToString();
         }
