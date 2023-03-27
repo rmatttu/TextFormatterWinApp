@@ -25,6 +25,13 @@ namespace TextFormatterWinApp
             InitializeComponent();
         }
 
+        private string MainFilter(string text)
+        {
+            var normalized = Formatter.RemoveLineBreakToEndOfLine(text);
+            var normalizedLines = normalized.Split('\n').ToList();
+            return Formatter.AddQuoteRange(normalized, new Range(1, normalizedLines.Count - 1));
+        }
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var textLines = textBoxSource.Text.Split('\n').ToList();
@@ -33,11 +40,8 @@ namespace TextFormatterWinApp
                 return;
             }
 
-            var normalized = Formatter.RemoveLineBreakToEndOfLine(textBoxSource.Text);
-            var normalizedLines = normalized.Split('\n').ToList();
-            var result = Formatter.AddQuoteRange(normalized, new Range(1, normalizedLines.Count - 1));
-
-            textBoxDestination.Text = result;
+            textBoxDestination.Text = Formatter.FilterForwardMessage(textBoxSource.Text);
+            //textBoxDestination.Text = MainFilter(textBoxSource.Text);
         }
 
         private void ButtonDestination_Click(object sender, RoutedEventArgs e)
