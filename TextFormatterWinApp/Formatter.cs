@@ -9,6 +9,23 @@ namespace TextFormatterWinApp
 {
     class Formatter
     {
+        public static string FilterForwardMessage(string text)
+        {
+            var regex = new Regex("\\n---------- Forwarded message ---------\\n");
+            var results = regex.Matches(text);
+            if (results.Count <= 0)
+            {
+                return text;
+            }
+
+            var startIndex = results[0].Index + 1;
+            StringBuilder builder = new StringBuilder();
+            builder.Append("```txt\n");
+            builder.Append(text.Substring(startIndex, text.Length - startIndex));
+            builder.Append("```\n");
+            return builder.ToString();
+        }
+
         public static string AddQuote(string text)
         {
             var textLines = text.Split('\n');
