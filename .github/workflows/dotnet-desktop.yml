@@ -61,7 +61,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.configuration }}-${{ env.Platform }}
-        path: bin
+        path: ${{ env.Project_Name }}/bin/${{ env.Platform }}/${{ matrix.configuration }}/net6.0-windows/
 
     - name: ls files (power shell command)
       run: tree /f /a
