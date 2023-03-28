@@ -2,41 +2,33 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
 namespace TextFormatterWinApp
 {
     [Serializable()]
-    internal class Settings
+    public record Settings
     {
-        public int MainFormX { get; }
-        public int MainFormY { get; }
-        public int MainFormWidth { get; }
-        public int MainFormHeight { get; }
-        public bool AutoFormat { get; }
-        public bool Normalizer { get; }
-        public bool RemoveLineBreakToEndOfLine { get; }
-        public bool QuoteAfterLine2 { get; }
+        public double MainFormX { get; init; }
+        public double MainFormY { get; init; }
+        public double MainFormWidth { get; init; }
+        public double MainFormHeight { get; init; }
+        public bool AutoFormat { get; init; }
+        public bool Normalizer { get; init; }
+        public bool RemoveLineBreakToEndOfLine { get; init; }
+        public bool QuoteAfterLine2 { get; init; }
 
-        public Settings(
-            int mainFormX = 10,
-            int mainFormY = 25,
-            int mainFormWidth = 520,
-            int mainFormHeight = 200,
-            bool autoFormat = false,
-            bool normalizer = false,
-            bool removeLineBreakToEndOfLine = false,
-            bool quoteAfterLine2 = false
-        )
+        public Settings()
         {
-            MainFormX = mainFormX;
-            MainFormY = mainFormY;
-            MainFormWidth = mainFormWidth;
-            MainFormHeight = mainFormHeight;
-            AutoFormat = autoFormat;
-            Normalizer = normalizer;
-            RemoveLineBreakToEndOfLine = removeLineBreakToEndOfLine;
-            QuoteAfterLine2 = quoteAfterLine2;
+            MainFormX = 10;
+            MainFormY = 25;
+            MainFormWidth = 520;
+            MainFormHeight = 200;
+            AutoFormat = false;
+            Normalizer = false;
+            RemoveLineBreakToEndOfLine = false;
+            QuoteAfterLine2 = false;
         }
 
         public static Settings GenerateOrLoad()

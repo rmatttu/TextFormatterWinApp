@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TextFormatterWinApp"
         mc:Ignorable="d"
+        ContentRendered="Window_ContentRendered"
+        Closing="Window_Closing"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -45,19 +47,19 @@
                     <Label Content="Configure" />
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Left">
-                    <CheckBox Content="Auto format"></CheckBox>
+                    <CheckBox x:Name="checkBoxAutoFormat" Content="Auto format"></CheckBox>
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Left">
                     <Label Content="Normalizer" />
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Left">
-                    <CheckBox Content="Remove line break to end of line"></CheckBox>
+                    <CheckBox x:Name="checkBoxRemoveLineBreakToEndOfLine" Content="Remove line break to end of line"></CheckBox>
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Left">
                     <Label Content="Formatters" />
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top" HorizontalAlignment="Left">
-                    <CheckBox Content="Quote after line 2"></CheckBox>
+                    <CheckBox x:Name="checkBoxQuoteAfterLine2" Content="Quote after line 2"></CheckBox>
                 </DockPanel>
             </DockPanel>
         </DockPanel>

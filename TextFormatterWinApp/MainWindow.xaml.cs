@@ -25,6 +25,38 @@ namespace TextFormatterWinApp
             InitializeComponent();
         }
 
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            var settings = Settings.GenerateOrLoad();
+            Left = settings.MainFormX;
+            Top = settings.MainFormY;
+            Width = settings.MainFormWidth;
+            Height = settings.MainFormHeight;
+            checkBoxAutoFormat.IsChecked = settings.AutoFormat;
+            checkBoxQuoteAfterLine2.IsChecked = settings.QuoteAfterLine2;
+            checkBoxRemoveLineBreakToEndOfLine.IsChecked = settings.RemoveLineBreakToEndOfLine;
+        }
+
+        private Settings GetSettings()
+        {
+            return new Settings()
+            {
+                MainFormX = Left,
+                MainFormY = Top,
+                MainFormWidth = Width,
+                MainFormHeight = Height,
+                AutoFormat = checkBoxAutoFormat.IsChecked.Value,
+                QuoteAfterLine2 = checkBoxQuoteAfterLine2.IsChecked.Value,
+                RemoveLineBreakToEndOfLine = checkBoxRemoveLineBreakToEndOfLine.IsChecked.Value,
+            };
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var currentSettings = GetSettings();
+            Settings.SaveToXmlFile(currentSettings);
+        }
+
         private string MainFilter(string text)
         {
             var normalized = Formatter.RemoveLineBreakToEndOfLine(text);
@@ -48,5 +80,6 @@ namespace TextFormatterWinApp
         {
             Clipboard.SetText(textBoxDestination.Text);
         }
+
     }
 }
