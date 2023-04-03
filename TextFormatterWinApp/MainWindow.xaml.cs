@@ -70,14 +70,15 @@ namespace TextFormatterWinApp
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var textLines = textBoxSource.Text.Split('\n').ToList();
+            var text = textBoxSource.Text.Replace("\r", "");
+            var textLines = text.Split('\n').ToList();
             if (textLines.Count <= 0)
             {
                 return;
             }
 
-            textBoxDestination.Text = Formatter.FilterForwardMessage(textBoxSource.Text);
-            //textBoxDestination.Text = MainFilter(textBoxSource.Text);
+            textBoxDestination.Text = Formatter.FilterForwardMessage(text);
+            // textBoxDestination.Text = MainFilter(textBoxSource.Text);
         }
 
         private void ButtonDestination_Click(object sender, RoutedEventArgs e)
