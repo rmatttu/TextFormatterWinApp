@@ -77,8 +77,18 @@ namespace TextFormatterWinApp
                 return;
             }
 
-            textBoxDestination.Text = Formatter.FilterForwardMessage(text);
-            // textBoxDestination.Text = MainFilter(textBoxSource.Text);
+            var method = Detector.Detect(text);
+            switch (method)
+            {
+                case FormatMethod.Email:
+                    textBoxDestination.Text = Formatter.FilterForwardMessage(text);
+                    break;
+                case FormatMethod.Normal:
+                    textBoxDestination.Text = MainFilter(textBoxSource.Text);
+                    break;
+                default:
+                    throw new Exception("No such FormatMethod");
+            }
         }
 
         private void ButtonDestination_Click(object sender, RoutedEventArgs e)
